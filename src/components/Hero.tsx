@@ -40,16 +40,13 @@ export const Hero = () => {
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg hover:shadow-primary/50 transition-all">
                 Get Started <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-border hover:bg-secondary">
-                View Documentation
-              </Button>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8">
               <div className="space-y-1">
-                <div className="text-3xl font-bold text-primary">98%</div>
-                <div className="text-sm text-muted-foreground">Success Rate</div>
+                <div className="text-3xl font-bold text-primary">99.9%</div>
+                <div className="text-sm text-muted-foreground">Uptime</div>
               </div>
               <div className="space-y-1">
                 <div className="text-3xl font-bold text-accent">50ms</div>

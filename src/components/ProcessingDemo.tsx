@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 
 export const ProcessingDemo = () => {
-  const [progress, setProgress] = useState(98);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + Math.random() * 3;
-      });
-    }, 150);
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 2000);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -33,16 +30,16 @@ export const ProcessingDemo = () => {
           <div className="space-y-3">
             <div className="h-3 bg-secondary rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300 ease-out animate-shimmer"
+                className="h-full bg-gradient-to-r from-primary to-accent rounded-full animate-shimmer"
                 style={{ 
-                  width: `${Math.min(progress, 100)}%`,
+                  width: "98%",
                   backgroundSize: "200% 100%"
                 }}
               />
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">Progress</span>
-              <span className="text-lg font-bold text-primary">{Math.floor(Math.min(progress, 100))}%</span>
+              <span className="text-lg font-bold text-primary">98%</span>
             </div>
           </div>
 
@@ -63,13 +60,23 @@ export const ProcessingDemo = () => {
           </div>
 
           {/* Processing indicator */}
-          <div className="flex items-center gap-2 pt-2">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: "0.2s" }} />
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: "0.4s" }} />
+          <div className="space-y-3 pt-2">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: "0.2s" }} />
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: "0.4s" }} />
+              </div>
+              <span className="text-sm text-muted-foreground">Verifying transaction...</span>
             </div>
-            <span className="text-sm text-muted-foreground">Verifying transaction...</span>
+            
+            {showMessage && (
+              <div className="animate-fade-in-up bg-accent/10 border border-accent/30 rounded-lg p-3">
+                <p className="text-sm text-accent font-medium">
+                  Wait, it will take a little longer
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
