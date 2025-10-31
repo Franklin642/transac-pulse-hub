@@ -9,7 +9,7 @@ export const ProcessingDemo = () => {
     const updateProgress = () => {
       if (currentProgress >= 98) {
         setProgress(98);
-        setShowMessage(true);
+        setTimeout(() => setShowMessage(true), 1000);
         return;
       }
       
