@@ -1,11 +1,28 @@
 import { useEffect, useState } from "react";
 export const ProcessingDemo = () => {
+  const [progress, setProgress] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
+  
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    // Animate progress from 0 to 98% over 3 seconds
+    const duration = 3000;
+    const interval = 50;
+    const steps = duration / interval;
+    const increment = 98 / steps;
+    
+    let currentProgress = 0;
+    const timer = setInterval(() => {
+      currentProgress += increment;
+      if (currentProgress >= 98) {
+        currentProgress = 98;
+        clearInterval(timer);
+        // Show message after getting stuck at 98%
+        setTimeout(() => setShowMessage(true), 1000);
+      }
+      setProgress(Math.min(currentProgress, 98));
+    }, interval);
+    
+    return () => clearInterval(timer);
   }, []);
   return <div className="relative w-full max-w-md mx-auto">
       {/* Card with glass effect */}
@@ -24,14 +41,14 @@ export const ProcessingDemo = () => {
           {/* Progress bar */}
           <div className="space-y-3">
             <div className="h-3 bg-secondary rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-primary to-accent rounded-full animate-shimmer" style={{
-              width: "98%",
+              <div className="h-full bg-gradient-to-r from-primary to-accent rounded-full animate-shimmer transition-all duration-300" style={{
+              width: `${progress}%`,
               backgroundSize: "200% 100%"
             }} />
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">Progress</span>
-              <span className="text-lg font-bold text-primary">98%</span>
+              <span className="text-lg font-bold text-primary">{Math.round(progress)}%</span>
             </div>
           </div>
 
