@@ -36,12 +36,6 @@ export const Hero = () => {
               Built for scale, designed for developers.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg hover:shadow-primary/50 transition-all">
-                Get Started <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8">
               <div className="space-y-1">
