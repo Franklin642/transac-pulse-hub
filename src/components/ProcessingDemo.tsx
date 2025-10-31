@@ -4,25 +4,33 @@ export const ProcessingDemo = () => {
   const [showMessage, setShowMessage] = useState(false);
   
   useEffect(() => {
-    // Animate progress from 0 to 98% over 3 seconds
-    const duration = 3000;
-    const interval = 50;
-    const steps = duration / interval;
-    const increment = 98 / steps;
-    
     let currentProgress = 0;
-    const timer = setInterval(() => {
-      currentProgress += increment;
-      if (currentProgress >= 98) {
-        currentProgress = 98;
-        clearInterval(timer);
-        // Show message after getting stuck at 98%
-        setTimeout(() => setShowMessage(true), 1000);
-      }
-      setProgress(Math.min(currentProgress, 98));
-    }, interval);
     
-    return () => clearInterval(timer);
+    const updateProgress = () => {
+      if (currentProgress >= 98) {
+        setProgress(98);
+        setTimeout(() => setShowMessage(true), 1000);
+        return;
+      }
+      
+      // Variable speed: sometimes fast (0.5-2%), sometimes slow (0.1-0.3%)
+      const isFast = Math.random() > 0.6;
+      const increment = isFast 
+        ? Math.random() * 1.5 + 0.5  // Fast: 0.5-2%
+        : Math.random() * 0.2 + 0.1; // Slow: 0.1-0.3%
+      
+      currentProgress = Math.min(currentProgress + increment, 98);
+      setProgress(currentProgress);
+      
+      // Variable interval: sometimes quick updates, sometimes delayed
+      const delay = isFast 
+        ? Math.random() * 500 + 200   // Fast: 200-700ms
+        : Math.random() * 2000 + 1000; // Slow: 1-3 seconds
+      
+      setTimeout(updateProgress, delay);
+    };
+    
+    updateProgress();
   }, []);
   return <div className="relative w-full max-w-md mx-auto">
       {/* Card with glass effect */}
