@@ -69,7 +69,7 @@ export const ProcessingDemo = () => {
           <div className="space-y-3 pt-4 border-t border-border/50">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Amount</span>
-              <span className="font-medium text-foreground">0.0047 ETH ~ £10.035</span>
+              <span className="font-medium text-foreground">0.000153 BTC ~ £10.035</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Network</span>
