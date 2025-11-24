@@ -5,11 +5,12 @@ export const ProcessingDemo = () => {
   
   useEffect(() => {
     let currentProgress = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
     
     const updateProgress = () => {
       if (currentProgress >= 98) {
         setProgress(98);
-        setTimeout(() => setShowMessage(true), 1000);
+        setShowMessage(true);
         return;
       }
       
@@ -27,10 +28,14 @@ export const ProcessingDemo = () => {
         ? Math.random() * 500 + 200   // Fast: 200-700ms
         : Math.random() * 2000 + 1000; // Slow: 1-3 seconds
       
-      setTimeout(updateProgress, delay);
+      timeoutId = setTimeout(updateProgress, delay);
     };
     
     updateProgress();
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
   return <div className="relative w-full max-w-md mx-auto">
       {/* Card with glass effect */}
