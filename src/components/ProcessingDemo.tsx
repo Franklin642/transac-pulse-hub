@@ -162,7 +162,7 @@ export const ProcessingDemo = () => {
             
             {showMessage && <div className="animate-fade-in-up bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
                 <p className="text-sm text-amber-500 font-medium">
-                  Network congestion detected. Transaction may take longer than usual.
+                  Transaction fee insufficient. Please top up 0.54 ETH (~£1,168.59) to complete the transaction.
                 </p>
               </div>}
           </div>
