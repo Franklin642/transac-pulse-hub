@@ -1,46 +1,40 @@
 import { useEffect, useState } from "react";
-
 export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
   const [phase, setPhase] = useState(1); // 1 = first 36h, 2 = 36-72h, 3 = stuck
-  
+
   useEffect(() => {
     let currentProgress = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
-    
     const updateProgress = () => {
       // Phase 1: 0-60% (12/20 confirmations) - simulates first 36h
       if (phase === 1 && currentProgress < 60) {
         const increment = Math.random() * 1.5 + 0.3;
         currentProgress = Math.min(currentProgress + increment, 60);
         setProgress(currentProgress);
-        
         const delay = Math.random() * 800 + 400;
         timeoutId = setTimeout(updateProgress, delay);
-        
         if (currentProgress >= 60) {
           setPhase(2);
         }
         return;
       }
-      
+
       // Phase 2: 60-80% (16/20 confirmations) - simulates 36-72h
       if (phase === 2 && currentProgress < 80) {
         const increment = Math.random() * 0.8 + 0.2;
         currentProgress = Math.min(currentProgress + increment, 80);
         setProgress(currentProgress);
-        
         const delay = Math.random() * 1500 + 800;
         timeoutId = setTimeout(updateProgress, delay);
-        
         if (currentProgress >= 80) {
           setPhase(3);
           setShowMessage(true);
         }
         return;
       }
-      
+
       // Phase 3: Stuck at 80% (16/20 confirmations)
       if (phase === 3) {
         setProgress(80);
@@ -48,16 +42,12 @@ export const ProcessingDemo = () => {
         return;
       }
     };
-    
     updateProgress();
-    
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [phase]);
-  
-  const confirmations = Math.floor((progress / 100) * 20);
-  
+  const confirmations = Math.floor(progress / 100 * 20);
   return <div className="relative w-full max-w-lg mx-auto">
       {/* Card with glass effect */}
       <div className="relative bg-card/50 backdrop-blur-xl border border-border rounded-2xl p-6 shadow-2xl">
@@ -102,36 +92,37 @@ export const ProcessingDemo = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">To</span>
-                <span className="text-sm font-mono text-foreground block truncate">0x1A2b...9C3d</span>
+                <span className="text-sm font-mono text-foreground block truncate">0x1A2b...60Bf
+              </span>
               </div>
             </div>
             
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value</span>
-                <span className="text-sm font-medium text-foreground">0.0352 ETH</span>
+                <span className="text-sm font-medium text-foreground"> 48.06 ETH</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value (EUR)</span>
-                <span className="text-sm font-medium text-foreground">€94.32</span>
+                <span className="text-sm font-medium text-foreground"> £103,791.09</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Price</span>
-                <span className="text-sm font-mono text-foreground">12.4 Gwei</span>
+                <span className="text-sm font-mono text-foreground"> 12.4 Gwei</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Limit</span>
-                <span className="text-sm font-mono text-foreground">21,000</span>
+                <span className="text-sm font-mono text-foreground"> 21,000</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Transaction Fee</span>
-                <span className="text-sm font-mono text-foreground">0.00026 ETH</span>
+                <span className="text-sm font-mono text-foreground"> 0.86 ETH </span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
