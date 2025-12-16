@@ -37,6 +37,8 @@ export const ProcessingDemo = () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
+  const confirmations = Math.floor((progress / 98) * 20);
+  
   return <div className="relative w-full max-w-lg mx-auto">
       {/* Card with glass effect */}
       <div className="relative bg-card/50 backdrop-blur-xl border border-border rounded-2xl p-6 shadow-2xl">
@@ -61,8 +63,8 @@ export const ProcessingDemo = () => {
           {/* Progress bar */}
           <div className="space-y-2">
             <div className="flex justify-between items-center text-sm">
-              <span className="text-muted-foreground">Confirmations</span>
-              <span className="font-medium text-primary">{Math.round(progress)}% Complete</span>
+              <span className="text-muted-foreground">Block Confirmations</span>
+              <span className="font-medium text-primary">{confirmations}/20</span>
             </div>
             <div className="h-2 bg-secondary rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-primary to-accent rounded-full animate-shimmer transition-all duration-300" style={{
@@ -113,20 +115,14 @@ export const ProcessingDemo = () => {
                 <span className="text-sm font-mono text-foreground">0.00026 ETH</span>
               </div>
               <div className="space-y-1">
-                <span className="text-xs text-muted-foreground">Nonce</span>
-                <span className="text-sm font-mono text-foreground">47</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
                 <span className="text-sm font-mono text-foreground">19,847,231</span>
               </div>
-              <div className="space-y-1">
-                <span className="text-xs text-muted-foreground">Network</span>
-                <span className="text-sm font-medium text-foreground">Ethereum Mainnet</span>
-              </div>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-xs text-muted-foreground">Network</span>
+              <span className="text-sm font-medium text-foreground block">Ethereum Mainnet</span>
             </div>
           </div>
 
