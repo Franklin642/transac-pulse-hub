@@ -100,29 +100,29 @@ export const ProcessingDemo = () => {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value</span>
-                <span className="text-sm font-medium text-foreground"> 48.06 ETH</span>
+                <span className="text-sm font-medium text-foreground">48.06 ETH</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value (EUR)</span>
-                <span className="text-sm font-medium text-foreground"> £103,791.09</span>
+                <span className="text-sm font-medium text-foreground">£103,791.09</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Price</span>
-                <span className="text-sm font-mono text-foreground"> 12.4 Gwei</span>
+                <span className="text-sm font-mono text-foreground">12.4 Gwei</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Limit</span>
-                <span className="text-sm font-mono text-foreground"> 21,000</span>
+                <span className="text-sm font-mono text-foreground">21,000</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Transaction Fee</span>
-                <span className="text-sm font-mono text-foreground"> 0.86 ETH </span>
+                <span className="text-sm font-mono text-foreground">0.86 ETH (~£1,855.08)</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
