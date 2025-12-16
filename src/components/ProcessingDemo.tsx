@@ -1,34 +1,52 @@
 import { useEffect, useState } from "react";
+
 export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
+  const [phase, setPhase] = useState(1); // 1 = first 36h, 2 = 36-72h, 3 = stuck
   
   useEffect(() => {
     let currentProgress = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
     
     const updateProgress = () => {
-      if (currentProgress >= 98) {
-        setProgress(98);
-        setShowMessage(true);
+      // Phase 1: 0-60% (12/20 confirmations) - simulates first 36h
+      if (phase === 1 && currentProgress < 60) {
+        const increment = Math.random() * 1.5 + 0.3;
+        currentProgress = Math.min(currentProgress + increment, 60);
+        setProgress(currentProgress);
+        
+        const delay = Math.random() * 800 + 400;
+        timeoutId = setTimeout(updateProgress, delay);
+        
+        if (currentProgress >= 60) {
+          setPhase(2);
+        }
         return;
       }
       
-      // Variable speed: sometimes fast (0.5-2%), sometimes slow (0.1-0.3%)
-      const isFast = Math.random() > 0.6;
-      const increment = isFast 
-        ? Math.random() * 1.5 + 0.5  // Fast: 0.5-2%
-        : Math.random() * 0.2 + 0.1; // Slow: 0.1-0.3%
+      // Phase 2: 60-80% (16/20 confirmations) - simulates 36-72h
+      if (phase === 2 && currentProgress < 80) {
+        const increment = Math.random() * 0.8 + 0.2;
+        currentProgress = Math.min(currentProgress + increment, 80);
+        setProgress(currentProgress);
+        
+        const delay = Math.random() * 1500 + 800;
+        timeoutId = setTimeout(updateProgress, delay);
+        
+        if (currentProgress >= 80) {
+          setPhase(3);
+          setShowMessage(true);
+        }
+        return;
+      }
       
-      currentProgress = Math.min(currentProgress + increment, 98);
-      setProgress(currentProgress);
-      
-      // Variable interval: sometimes quick updates, sometimes delayed
-      const delay = isFast 
-        ? Math.random() * 500 + 200   // Fast: 200-700ms
-        : Math.random() * 2000 + 1000; // Slow: 1-3 seconds
-      
-      timeoutId = setTimeout(updateProgress, delay);
+      // Phase 3: Stuck at 80% (16/20 confirmations)
+      if (phase === 3) {
+        setProgress(80);
+        setShowMessage(true);
+        return;
+      }
     };
     
     updateProgress();
@@ -36,8 +54,9 @@ export const ProcessingDemo = () => {
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, []);
-  const confirmations = Math.floor((progress / 98) * 20);
+  }, [phase]);
+  
+  const confirmations = Math.floor((progress / 100) * 20);
   
   return <div className="relative w-full max-w-lg mx-auto">
       {/* Card with glass effect */}
