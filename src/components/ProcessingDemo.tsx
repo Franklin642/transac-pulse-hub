@@ -73,7 +73,7 @@ export const ProcessingDemo = () => {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Network</span>
-              <span className="font-medium text-foreground">Global</span>
+              <span className="font-medium text-foreground">Ethereum</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Status</span>
