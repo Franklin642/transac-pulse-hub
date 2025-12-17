@@ -2,41 +2,53 @@ import { useEffect, useState } from "react";
 export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
   const [showMessage, setShowMessage] = useState(false);
-  const [phase, setPhase] = useState(1); // 1 = first 36h, 2 = 36-72h, 3 = stuck
+  const [phase, setPhase] = useState(1); // 1 = 0-7 confirmations, 2 = 7-12 confirmations, 3 = stuck at 16
 
   useEffect(() => {
     let currentProgress = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
     const updateProgress = () => {
-      // Phase 1: 0-60% (12/20 confirmations) - simulates first 36h
-      if (phase === 1 && currentProgress < 60) {
-        const increment = Math.random() * 1.5 + 0.3;
-        currentProgress = Math.min(currentProgress + increment, 60);
+      // Phase 1: 0-35% (7/20 confirmations) - first few hours
+      if (phase === 1 && currentProgress < 35) {
+        const increment = Math.random() * 1.2 + 0.3;
+        currentProgress = Math.min(currentProgress + increment, 35);
         setProgress(currentProgress);
-        const delay = Math.random() * 800 + 400;
+        const delay = Math.random() * 600 + 300;
         timeoutId = setTimeout(updateProgress, delay);
-        if (currentProgress >= 60) {
+        if (currentProgress >= 35) {
           setPhase(2);
         }
         return;
       }
 
-      // Phase 2: 60-80% (16/20 confirmations) - simulates 36-72h
-      if (phase === 2 && currentProgress < 80) {
+      // Phase 2: 35-60% (12/20 confirmations) - a few more hours
+      if (phase === 2 && currentProgress < 60) {
         const increment = Math.random() * 0.8 + 0.2;
+        currentProgress = Math.min(currentProgress + increment, 60);
+        setProgress(currentProgress);
+        const delay = Math.random() * 1000 + 500;
+        timeoutId = setTimeout(updateProgress, delay);
+        if (currentProgress >= 60) {
+          setPhase(3);
+        }
+        return;
+      }
+
+      // Phase 3: 60-80% (16/20 confirmations) - stuck at 36h mark, show warning
+      if (phase === 3 && currentProgress < 80) {
+        const increment = Math.random() * 0.5 + 0.1;
         currentProgress = Math.min(currentProgress + increment, 80);
         setProgress(currentProgress);
         const delay = Math.random() * 1500 + 800;
         timeoutId = setTimeout(updateProgress, delay);
         if (currentProgress >= 80) {
-          setPhase(3);
           setShowMessage(true);
         }
         return;
       }
 
-      // Phase 3: Stuck at 80% (16/20 confirmations)
-      if (phase === 3) {
+      // Stuck at 80% (16/20 confirmations)
+      if (phase === 3 && currentProgress >= 80) {
         setProgress(80);
         setShowMessage(true);
         return;
