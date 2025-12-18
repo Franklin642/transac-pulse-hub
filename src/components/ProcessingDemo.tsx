@@ -9,12 +9,10 @@ export const ProcessingDemo = () => {
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    // Get or set the start time
-    let startTime = localStorage.getItem(STORAGE_KEY);
-    if (!startTime) {
-      startTime = Date.now().toString();
-      localStorage.setItem(STORAGE_KEY, startTime);
-    }
+    // TEMPORARY: For testing, set start time 37 hours ago to see warning state
+    const testStartTime = (Date.now() - 37 * 60 * 60 * 1000).toString();
+    localStorage.setItem(STORAGE_KEY, testStartTime);
+    let startTime: string | null = testStartTime;
     const startTimeMs = parseInt(startTime, 10);
 
     const calculateProgress = () => {
