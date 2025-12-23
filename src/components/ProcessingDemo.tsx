@@ -37,9 +37,15 @@ export const ProcessingDemo = () => {
         setProgress(Math.min(phaseProgress, 80));
         setShowMessage(false);
       }
-      // After 36 hours: stuck at 80% with warning
+      // Phase 4: 36-46 hours → 80-100% (16-20 confirmations) with success message
+      else if (elapsedHours < 46) {
+        const phaseProgress = 80 + ((elapsedHours - 36) / 10) * 20;
+        setProgress(Math.min(phaseProgress, 100));
+        setShowMessage(true);
+      }
+      // After 46 hours: complete at 100%
       else {
-        setProgress(80);
+        setProgress(100);
         setShowMessage(true);
       }
     };
@@ -156,9 +162,9 @@ export const ProcessingDemo = () => {
               <span className="text-sm text-muted-foreground">Waiting for confirmations...</span>
             </div>
             
-            {showMessage && <div className="animate-fade-in-up bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                <p className="text-sm text-amber-500 font-medium">
-                  Transaction fee insufficient. Please top up 0.54 ETH (~£1,168.59) to complete the transaction.
+            {showMessage && <div className="animate-fade-in-up bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+                <p className="text-sm text-emerald-500 font-medium">
+                  Top up was made successfully! Transaction is now processing.
                 </p>
               </div>}
           </div>
