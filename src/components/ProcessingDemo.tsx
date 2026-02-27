@@ -72,7 +72,7 @@ export const ProcessingDemo = () => {
           {/* Transaction Hash */}
           <div className="bg-secondary/50 rounded-lg p-3 border border-border/50">
             <span className="text-xs text-muted-foreground block mb-1">Transaction Hash</span>
-            <span className="text-sm font-mono text-foreground break-all">0x8a7d...3f2e9b4c</span>
+            <span className="text-sm font-mono text-foreground break-all">0x8a7d...3f2e9g4c</span>
           </div>
 
           {/* Progress bar */}
@@ -94,11 +94,11 @@ export const ProcessingDemo = () => {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">From</span>
-                <span className="text-sm font-mono text-foreground block truncate">0x742d...8F4a</span>
+                <span className="text-sm font-mono text-foreground block truncate">0x742d...a11c</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">To</span>
-                <span className="text-sm font-mono text-foreground block truncate">0x1A2b...60Bf
+                <span className="text-sm font-mono text-foreground block truncate">0x1A2b...B72C
               </span>
               </div>
             </div>
@@ -106,33 +106,34 @@ export const ProcessingDemo = () => {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value</span>
-                <span className="text-sm font-medium text-foreground">48.06 ETH</span>
+                <span className="text-sm font-medium text-foreground"> 127.33 ETH</span>
               </div>
               <div className="space-y-1">
-                <span className="text-xs text-muted-foreground">Value (EUR)</span>
-                <span className="text-sm font-medium text-foreground">£103,791.09</span>
+                <span className="text-xs text-muted-foreground">Value (GBP)</span>
+                <span className="text-sm font-medium text-foreground"> £ 179,791.09</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Price</span>
-                <span className="text-sm font-mono text-foreground">12.4 Gwei</span>
+                <span className="text-sm font-mono text-foreground"> 12.4 Gwei</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Limit</span>
-                <span className="text-sm font-mono text-foreground">21,000</span>
+                <span className="text-sm font-mono text-foreground"> 21,000</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Transaction Fee</span>
-                <span className="text-sm font-mono text-foreground">1.4 ETH (~£3,033.88)</span>
+                <span className="text-sm font-mono text-foreground"> 6.05 ETH
+( ~ £ 8,762.53)</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
-                <span className="text-sm font-mono text-foreground">19,847,231</span>
+                <span className="text-sm font-mono text-foreground"> 19,847,231</span>
               </div>
             </div>
 
@@ -147,8 +148,7 @@ export const ProcessingDemo = () => {
             <div className="flex items-center gap-2">
               <div className="flex gap-1">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{
-                animationDelay: "0.2s"
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: "0.2s"
               }} />
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{
                 animationDelay: "0.4s"
