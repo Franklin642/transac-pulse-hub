@@ -5,8 +5,9 @@ export const ProcessingDemo = () => {
   const [showWarning, setShowWarning] = useState(false);
   useEffect(() => {
     // Clear any old test data and start fresh
+    // TESTING: Start 1.6 hours ago to trigger warning immediately
     localStorage.removeItem(STORAGE_KEY);
-    const startTime = Date.now().toString();
+    const startTime = (Date.now() - 1.6 * 60 * 60 * 1000).toString();
     localStorage.setItem(STORAGE_KEY, startTime);
     const startTimeMs = parseInt(startTime, 10);
     const calculateProgress = () => {
