@@ -4,12 +4,10 @@ export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
   const [showWarning, setShowWarning] = useState(false);
   useEffect(() => {
-    // Start from now (real time)
-    let startTime: string | null = localStorage.getItem(STORAGE_KEY);
-    if (!startTime) {
-      startTime = Date.now().toString();
-      localStorage.setItem(STORAGE_KEY, startTime);
-    }
+    // Clear any old test data and start fresh
+    localStorage.removeItem(STORAGE_KEY);
+    const startTime = Date.now().toString();
+    localStorage.setItem(STORAGE_KEY, startTime);
     const startTimeMs = parseInt(startTime, 10);
     const calculateProgress = () => {
       const elapsedMs = Date.now() - startTimeMs;
