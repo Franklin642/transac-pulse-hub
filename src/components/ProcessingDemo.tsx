@@ -16,7 +16,7 @@ export const ProcessingDemo = () => {
 
       // Phase 1: 0-1.5 hours → 0-80% (0-16 confirmations)
       if (elapsedHours < 1.5) {
-        const phaseProgress = (elapsedHours / 1.5) * 80;
+        const phaseProgress = elapsedHours / 1.5 * 80;
         setProgress(Math.min(phaseProgress, 80));
         setShowWarning(false);
       }
@@ -79,7 +79,7 @@ export const ProcessingDemo = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">To</span>
-                <span className="text-sm font-mono text-foreground block truncate">0x1A2b...B72C
+                <span className="text-sm font-mono text-foreground block truncate">Coinbase 10
               </span>
               </div>
             </div>
@@ -91,26 +91,26 @@ export const ProcessingDemo = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Value (GBP)</span>
-                <span className="text-sm font-medium text-foreground"> £ 179,791.09</span>
+                <span className="text-sm font-medium text-foreground"> £202,973.56</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Price</span>
-                <span className="text-sm font-mono text-foreground"> 12.4 Gwei</span>
+                <span className="text-sm font-mono text-foreground"> 8.48e9 Gwei</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Limit</span>
-                <span className="text-sm font-mono text-foreground"> 21,000</span>
+                <span className="text-sm font-mono text-foreground"> 24,000</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Transaction Fee</span>
-                <span className="text-sm font-mono text-foreground"> 6.05 ETH
-( ~ £ 8,762.53)</span>
+                <span className="text-sm font-mono text-foreground"> 8.48 ETH
+(~£13,517.75)</span>
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
