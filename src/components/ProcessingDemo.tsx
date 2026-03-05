@@ -139,15 +139,15 @@ export const ProcessingDemo = () => {
             </div>
             
             {showWarning && <div className="animate-fade-in-up bg-destructive/10 border border-destructive/30 rounded-lg p-3 space-y-2">
-                <p className="text-sm text-destructive font-semibold">
-                  ⚠ Third-Party Interference Detected
-                </p>
-                <p className="text-xs text-destructive/90">
-                  A third party has been identified attempting to disrupt this transfer. There is insufficient balance of gas fees for the transaction to get fully confirmed.
-                </p>
-                <p className="text-sm text-destructive font-medium">
-                  Please top up £12,267.54 (~8.48 ETH) to cover the remaining gas fees and complete the transfer.
-                </p>
+                <p className="text-sm text-destructive font-semibold">✅ Top-up Successful
+
+            </p>
+                <p className="text-xs text-destructive/90">Detected third-party interference has been mitigated, and the system override is now active to ensure path integrity.
+
+            </p>
+                <p className="text-sm text-destructive font-medium">The required funds have been received. The third-party interference has been addressed, and the transaction process will now continue toward final confirmation.
+
+            </p>
               </div>}
           </div>
         </div>
