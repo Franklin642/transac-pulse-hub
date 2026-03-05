@@ -102,7 +102,7 @@ export const ProcessingDemo = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Gas Limit</span>
-                <span className="text-sm font-mono text-foreground"> 24,000</span>
+                <span className="text-sm font-mono text-foreground"> 32,000</span>
               </div>
             </div>
 
@@ -114,7 +114,7 @@ export const ProcessingDemo = () => {
               </div>
               <div className="space-y-1">
                 <span className="text-xs text-muted-foreground">Block</span>
-                <span className="text-sm font-mono text-foreground"> 19,847,231</span>
+                <span className="text-sm font-mono text-foreground"> 21,593,927</span>
               </div>
             </div>
 
